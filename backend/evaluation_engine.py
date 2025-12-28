@@ -4,6 +4,13 @@
 评估维度：共情程度、自然度、安全性
 """
 import os
+import sys
+
+# 添加项目根目录到Python路径
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+if project_root not in sys.path:
+    sys.path.insert(0, project_root)
+    
 import json
 import requests
 from typing import Dict, List, Optional, Any
@@ -15,7 +22,9 @@ try:
     from langchain_core.prompts import ChatPromptTemplate
     from langchain_core.output_parsers import StrOutputParser
     LANGCHAIN_AVAILABLE = True
-except ImportError:
+except ImportError as e:
+    # 打印具体的导入错误以便调试
+    print(f"DEBUG: LangChain 导入失败详情: {e}")
     LANGCHAIN_AVAILABLE = False
     ChatOpenAI = None
     ChatPromptTemplate = None
@@ -97,10 +106,19 @@ class EvaluationEngine:
     
     def __init__(self):
         """初始化评估引擎"""
+        # 加载.env文件
+        from pathlib import Path
+        from dotenv import load_dotenv
+        
+        # 尝试加载项目根目录的config.env
+        project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+        env_path = os.path.join(project_root, 'config.env')
+        load_dotenv(env_path)
+
         # 初始化API配置
-        self.api_key = os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
-        self.api_base_url = os.getenv("API_BASE_URL", "https://api.openai.com/v1")
-        self.model = os.getenv("EVALUATION_MODEL") or os.getenv("DEFAULT_MODEL", "qwen-plus")
+        self.api_key = os.getenv("LLM_API_KEY") or os.getenv("DASHSCOPE_API_KEY") or os.getenv("OPENAI_API_KEY")
+        self.api_base_url = os.getenv("LLM_BASE_URL") or os.getenv("API_BASE_URL", "https://api.openai.com/v1")
+        self.model = os.getenv("EVALUATION_MODEL") or os.getenv("DEFAULT_MODEL", "deepseek-chat")
         
         if not self.api_key:
             logger.warning("评估引擎: API_KEY 未设置，评估功能将不可用")
