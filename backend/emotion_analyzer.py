@@ -55,6 +55,10 @@ class EmotionAnalyzer:
             "grateful": ["感谢", "感激", "谢谢", "🙏", "💝", "❤️"]
         }
     
+    def analyze(self, message: str) -> Dict:
+        """分析用户消息的情感"""
+        return self.analyze_emotion(message)
+
     def analyze_emotion(self, message: str) -> Dict:
         """分析用户消息的情感"""
         try:

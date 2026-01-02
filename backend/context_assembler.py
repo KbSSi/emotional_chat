@@ -96,6 +96,14 @@ class ContextAssembler:
         self.memory_manager = MemoryManager()
         self.user_profiles = {}  # 缓存用户画像
     
+    def assemble(self, user_id: str, session_id: str, 
+                        current_message: str,
+                        chat_history: Optional[List[Dict[str, str]]] = None,
+                        emotion: Optional[str] = None,
+                        emotion_intensity: Optional[float] = None) -> Dict[str, Any]:
+        """组装完整上下文 (assemble_context 的别名)"""
+        return self.assemble_context(user_id, session_id, current_message, chat_history, emotion, emotion_intensity)
+
     def assemble_context(self, user_id: str, session_id: str, 
                         current_message: str,
                         chat_history: Optional[List[Dict[str, str]]] = None,

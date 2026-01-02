@@ -21,6 +21,11 @@ class VectorStore:
             allow_reset=True
         )
         
+        # 禁用 PostHog 遥测
+        import os
+        os.environ["ANONYMIZED_TELEMETRY"] = "False"
+        os.environ["CHROMA_TELEMETRY_IMPL"] = "chromadb.telemetry.product.posthog.Posthog"
+        
         # 如果数据库目录存在但架构不匹配，删除并重建
         db_path = Config.CHROMA_PERSIST_DIRECTORY
         if os.path.exists(db_path):

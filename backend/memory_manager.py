@@ -35,6 +35,31 @@ class MemoryManager:
             print(f"初始化记忆集合失败: {e}")
             self.memory_collection = None
     
+    def search_memories(self, query: str, limit: int = 5) -> List[Dict[str, Any]]:
+        """搜索记忆"""
+        if not self.memory_collection:
+            return []
+            
+        try:
+            results = self.memory_collection.query(
+                query_texts=[query],
+                n_results=limit
+            )
+            
+            memories = []
+            if results["documents"]:
+                for i, doc in enumerate(results["documents"][0]):
+                    metadata = results["metadatas"][0][i] if results["metadatas"] else {}
+                    memories.append({
+                        "content": doc,
+                        "metadata": metadata,
+                        "distance": results["distances"][0][i] if results["distances"] else 0
+                    })
+            return memories
+        except Exception as e:
+            print(f"搜索记忆失败: {e}")
+            return []
+
     def process_conversation(self, session_id: str, user_id: str, 
                            user_message: str, bot_response: str,
                            emotion: Optional[str] = None, 

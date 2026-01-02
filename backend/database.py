@@ -57,8 +57,12 @@ class ChatMessage(Base):
     role = Column(String(20))  # user, assistant
     content = Column(Text)
     emotion = Column(String(50))  # 情感标签
+    emotion_label = Column(String(50))  # 兼容别名：情感标签
     emotion_intensity = Column(Float)  # 情感强度
     created_at = Column(DateTime, default=datetime.utcnow)
+
+# 兼容性别名，供其他模块使用
+Message = ChatMessage
 
 class EmotionAnalysis(Base):
     """情感分析记录表"""
@@ -229,7 +233,7 @@ class ABTestExperiment(Base):
     start_date = Column(DateTime)  # 开始时间
     end_date = Column(DateTime, nullable=True)  # 结束时间
     enabled = Column(Boolean, default=True)  # 是否启用
-    metadata = Column(Text)  # 额外元数据（JSON格式）
+    meta_data = Column(Text)  # 额外元数据（JSON格式）
     
     created_at = Column(DateTime, default=datetime.utcnow)
     updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
