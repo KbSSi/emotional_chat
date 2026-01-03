@@ -255,7 +255,7 @@ class EnhancedChatService:
                     {
                         "role": msg.role,
                         "content": msg.content,
-                        "emotion": msg.emotion,
+                        "emotion": msg.emotion_label,
                         "emotion_intensity": msg.emotion_intensity,
                         "timestamp": msg.created_at.isoformat() if msg.created_at else None
                     }
@@ -422,7 +422,7 @@ class EnhancedChatService:
                             "id": msg.id,
                             "role": msg.role,
                             "content": msg.content,
-                            "emotion": msg.emotion,
+                            "emotion": msg.emotion_label,
                             "emotion_intensity": msg.emotion_intensity,
                             "timestamp": msg.created_at.isoformat() if msg.created_at else None
                         }

@@ -951,8 +951,8 @@ class EmotionalChatEngineWithPlugins:
             
             emotion_counts = {}
             for msg in messages:
-                if msg.emotion:
-                    emotion_counts[msg.emotion] = emotion_counts.get(msg.emotion, 0) + 1
+                if msg.emotion_label:
+                    emotion_counts[msg.emotion_label] = emotion_counts.get(msg.emotion_label, 0) + 1
             
             return {
                 "session_id": session_id,

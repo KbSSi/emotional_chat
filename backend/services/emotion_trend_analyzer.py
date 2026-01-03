@@ -63,8 +63,8 @@ class EmotionTrendAnalyzer:
                 timestamps = []
                 
                 for msg in messages:
-                    if msg.emotion:
-                        emotions.append(msg.emotion)
+                    if msg.emotion_label:
+                        emotions.append(msg.emotion_label)
                         intensities.append(msg.emotion_intensity or 5.0)
                         timestamps.append(msg.created_at)
                 
@@ -523,7 +523,7 @@ class EmotionTrendAnalyzer:
                     .all()
                 
                 # 2. 情绪稳定性分析
-                emotions = [msg.emotion for msg in messages if msg.emotion]
+                emotions = [msg.emotion_label for msg in messages if msg.emotion_label]
                 emotion_changes = sum(1 for i in range(1, len(emotions)) if emotions[i] != emotions[i-1])
                 stability_score = 1 - (emotion_changes / len(emotions)) if len(emotions) > 1 else 0.5
                 

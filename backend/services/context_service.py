@@ -153,7 +153,7 @@ class ContextService:
                     {
                         "role": msg.role,
                         "content": msg.content,
-                        "emotion": msg.emotion,
+                        "emotion": msg.emotion_label,
                         "timestamp": msg.created_at.isoformat() if msg.created_at else None
                     }
                     for msg in reversed(messages)  # 按时间正序

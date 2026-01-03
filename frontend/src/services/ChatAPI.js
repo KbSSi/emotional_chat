@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Use local server for development, external server for production
-const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8000';
+const API_BASE_URL = process.env.REACT_APP_API_URL || 'http://localhost:8080';
 
 class ChatAPI {
   static async sendMessage(data) {

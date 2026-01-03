@@ -50,10 +50,10 @@ class EmotionTracker:
                 # 分析情绪变化
                 emotion_timeline = []
                 for msg in messages:
-                    if msg.emotion:
+                    if msg.emotion_label:
                         emotion_timeline.append({
                             "timestamp": msg.created_at.isoformat(),
-                            "emotion": msg.emotion,
+                            "emotion": msg.emotion_label,
                             "intensity": msg.emotion_intensity or 5.0
                         })
                 
@@ -284,12 +284,12 @@ class ProactiveRecallSystem:
                 # 检查是否从负面情绪恢复
                 negative_emotions = ["sad", "angry", "anxious", "worried", "depressed"]
                 
-                if previous.emotion in negative_emotions and \
-                   current.emotion not in negative_emotions and \
+                if previous.emotion_label in negative_emotions and \
+                   current.emotion_label not in negative_emotions and \
                    (datetime.utcnow() - previous.created_at).days >= 1:
                     
                     return {
-                        "previous_emotion": previous.emotion,
+                        "previous_emotion": previous.emotion_label,
                         "previous_content": previous.content[:50],
                         "days_ago": (datetime.utcnow() - previous.created_at).days
                     }

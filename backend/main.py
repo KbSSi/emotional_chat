@@ -497,7 +497,7 @@ async def get_session_history(session_id: str, limit: int = 20):
                     {
                         "role": msg.role,
                         "content": msg.content,
-                        "emotion": msg.emotion,
+                        "emotion": msg.emotion_label,
                         "emotion_intensity": msg.emotion_intensity,
                         "timestamp": msg.created_at.isoformat()
                     }
@@ -818,7 +818,7 @@ async def batch_evaluate(request: BatchEvaluationRequest):
                         "session_id": msg.session_id,
                         "user_message": user_msg.content,
                         "bot_response": msg.content,
-                        "user_emotion": user_msg.emotion or "neutral",
+                        "user_emotion": user_msg.emotion_label or "neutral",
                         "emotion_intensity": user_msg.emotion_intensity or 5.0
                     })
                     user_msg = None

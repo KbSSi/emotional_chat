@@ -9,7 +9,7 @@ pkill -f "react-scripts start" 2>/dev/null
 sleep 3
 
 # 启动后端（使用 Python 3.10）
-cd /home/workSpace/emotional_chat
+cd D:\\project\\AI\\emotional_chat
 nohup python3.10 run_backend.py > log/backend.log 2>&1 &
 echo "后端启动中..."
 
@@ -17,7 +17,7 @@ echo "后端启动中..."
 sleep 5
 
 # 启动前端
-cd /home/workSpace/emotional_chat/frontend
+cd D:\\project\\AI\\emotional_chat/frontend
 nohup npm start > ../log/frontend.log 2>&1 &
 echo "前端启动中..."
 

@@ -121,7 +121,7 @@ async def batch_evaluate(request: BatchEvaluationRequest):
                         "session_id": msg.session_id,
                         "user_message": user_msg.content,
                         "bot_response": msg.content,
-                        "user_emotion": user_msg.emotion or "neutral",
+                        "user_emotion": user_msg.emotion_label or "neutral",
                         "emotion_intensity": user_msg.emotion_intensity or 5.0
                     })
                     user_msg = None

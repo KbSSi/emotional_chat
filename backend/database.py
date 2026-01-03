@@ -56,8 +56,8 @@ class ChatMessage(Base):
     user_id = Column(String(100), index=True)
     role = Column(String(20))  # user, assistant
     content = Column(Text)
-    emotion = Column(String(50))  # 情感标签
-    emotion_label = Column(String(50))  # 兼容别名：情感标签
+    # 将 emotion 重命名为 emotion_label
+    emotion_label = Column(String(50))  # 情感标签
     emotion_intensity = Column(Float)  # 情感强度
     created_at = Column(DateTime, default=datetime.utcnow)
 
@@ -350,7 +350,7 @@ class DatabaseManager:
             user_id=user_id,
             role=role,
             content=content,
-            emotion=emotion,
+            emotion_label=emotion,  # 映射到 emotion_label
             emotion_intensity=emotion_intensity
         )
         self.db.add(message)

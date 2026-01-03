@@ -128,7 +128,7 @@ class APIConfig:
     docs_url: str = "/docs"
     redoc_url: str = "/redoc"
     host: str = "0.0.0.0"
-    port: int = 8000
+    port: int = 8080
     workers: int = 1
     reload: bool = False
 

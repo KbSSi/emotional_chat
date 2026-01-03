@@ -200,8 +200,8 @@ class UserProfileBuilder:
         late_avg = sum(late_intensities) / len(late_intensities)
         
         # 统计主要情绪
-        early_emotions = [m.emotion for m in early_messages if m.emotion]
-        late_emotions = [m.emotion for m in late_messages if m.emotion]
+        early_emotions = [m.emotion_label for m in early_messages if m.emotion_label]
+        late_emotions = [m.emotion_label for m in late_messages if m.emotion_label]
         
         early_emotion = Counter(early_emotions).most_common(1)[0][0] if early_emotions else "neutral"
         late_emotion = Counter(late_emotions).most_common(1)[0][0] if late_emotions else "neutral"
