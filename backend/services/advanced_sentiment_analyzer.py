@@ -68,7 +68,7 @@ class AdvancedSentimentAnalyzer:
             self.emotion_classifier = None
             
             # 注释掉原来的模型加载代码，避免网络问题
-            """
+           
             try:
                 # 加载情感极性分析模型（正面/负面/中性）
                 self.pipeline = pipeline(
@@ -93,7 +93,7 @@ class AdvancedSentimentAnalyzer:
             except Exception as e:
                 logger.warning(f"细粒度情绪模型加载失败: {e}")
                 self.emotion_classifier = None
-            """
+    
                 
         except ImportError:
             logger.warning("transformers库未安装，使用关键词分析")
@@ -586,7 +586,7 @@ def get_analyzer(use_transformers: bool = False) -> AdvancedSentimentAnalyzer:
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO)
     
-    analyzer = AdvancedSentimentAnalyzer(use_transformers=False)
+    analyzer = AdvancedSentimentAnalyzer(use_transformers=True)
     
     # 测试用例
     test_cases = [
